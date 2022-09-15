@@ -4,51 +4,49 @@ from cash_api.model.income import Income, IncomeSchema
 from cash_api.model.transaction_type import TransactionType
 
 
-
 app = Flask(__name__)
 
 transactions = [
-  Income('Salary', 5000),
-  Income('Dividends', 200),
-  Expense('pizza', 50),
-  Expense('Rock Concert', 100)
+    Income("Salary", 5000),
+    Income("Dividends", 200),
+    Expense("pizza", 50),
+    Expense("Rock Concert", 100),
 ]
 
 
-@app.route('/incomes')
+@app.route("/incomes")
 def get_incomes():
-  schema = IncomeSchema(many=True)
-  incomes = schema.dump(
-    filter(lambda t: t.type == TransactionType.INCOME, transactions)
-  )
+    schema = IncomeSchema(many=True)
+    incomes = schema.dump(
+        filter(lambda t: t.type == TransactionType.INCOME, transactions)
+    )
 
-  return jsonify(incomes.data)
+    return jsonify(incomes.data)
 
 
-
-@app.route('/incomes', method = {'POST'})
+@app.route("/incomes", method={"POST"})
 def add_incomes():
-  income = IncomeSchema().load(request.get_json())
-  transactions.append(income.data)
-  return "", 204
+    income = IncomeSchema().load(request.get_json())
+    transactions.append(income.data)
+    return "", 204
 
 
-@app.route('/expenses')
+@app.route("/expenses")
 def get_expenses():
-  schema = ExpenseSchema(many = True)
-  expenses = schema.dump(
-    filter(lambda t: t.type == TransactionType.EXPENSE, transactions)
-  )
+    schema = ExpenseSchema(many=True)
+    expenses = schema.dump(
+        filter(lambda t: t.type == TransactionType.EXPENSE, transactions)
+    )
 
-  return jsonify(expenses.data)
+    return jsonify(expenses.data)
 
 
-@app.route('/expenses', methods = ['POST'])
+@app.route("/expenses", methods=["POST"])
 def add_expenses():
-  expense = ExpenseSchema().load(request.get_json())
-  transactions.append(expense.data)
-  return "", 204
+    expense = ExpenseSchema().load(request.get_json())
+    transactions.append(expense.data)
+    return "", 204
 
 
-if __name__ == '__main__':
-  app.run()
+if __name__ == "__main__":
+    app.run()
