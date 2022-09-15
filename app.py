@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
-from cash_api.model.expense import Expense, ExpenseSchema
-from cash_api.model.income import Income, IncomeSchema
-from cash_api.model.transaction_type import TransactionType
+from model.expense import Expense, ExpenseSchema
+from model.income import Income, IncomeSchema
+from model.transaction_type import TransactionType
 
 
 app = Flask(__name__)
