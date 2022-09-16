@@ -9,11 +9,11 @@ class Expense(Transaction):
 
 
     def __repr__(self):
-        return '<Expense(name={self.description!r})>'.format(self= self)
+        return '<Expense(name={self.description!r})>'.format(self=self)
 
 
 class ExpenseSchema(TransactionSchema):
     @post_load
-    def make_expense(self, data):
+    def make_expense(self, data, **kwargs):
         return Expense(**data)
         

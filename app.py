@@ -27,7 +27,7 @@ def get_incomes():
 @app.route("/incomes", methods={"POST"})
 def add_income():
     income = IncomeSchema().load(request.get_json())
-    transactions.append(income.data)
+    transactions.append(income)
     return "", 204
 
 
@@ -44,7 +44,7 @@ def get_expenses():
 @app.route("/expenses", methods=["POST"])
 def add_expense():
     expense = ExpenseSchema().load(request.get_json())
-    transactions.append(expense.data)
+    transactions.append(expense)
     return "", 204
 
 

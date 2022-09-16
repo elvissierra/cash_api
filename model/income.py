@@ -13,5 +13,5 @@ class Income(Transaction):
 
 class IncomeSchema(TransactionSchema):
     @post_load
-    def make_income(self, data):
+    def make_income(self, data, **kwargs):
         return Income(**data)
