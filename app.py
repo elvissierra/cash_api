@@ -21,11 +21,11 @@ def get_incomes():
         filter(lambda t: t.type == TransactionType.INCOME, transactions)
     )
 
-    return jsonify(incomes.data)
+    return jsonify(incomes)
 
 
-@app.route("/incomes", method={"POST"})
-def add_incomes():
+@app.route("/incomes", methods={"POST"})
+def add_income():
     income = IncomeSchema().load(request.get_json())
     transactions.append(income.data)
     return "", 204
@@ -38,11 +38,11 @@ def get_expenses():
         filter(lambda t: t.type == TransactionType.EXPENSE, transactions)
     )
 
-    return jsonify(expenses.data)
+    return jsonify(expenses)
 
 
 @app.route("/expenses", methods=["POST"])
-def add_expenses():
+def add_expense():
     expense = ExpenseSchema().load(request.get_json())
     transactions.append(expense.data)
     return "", 204
